@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ymd.learn.mapper.UserMapper">
+
+	<select id="getUserById" parameterType="int"
+		resultType="com.ymd.learn.model.User">
+		select * from t_user where id = #{id}
+	</select>
+
+	<update id="updateUserById" parameterType="com.ymd.learn.model.User">
+		update t_user set name
+		= #{name} where id = #{id}
+	</update>
+
+	<insert id="insertUser" parameterType="com.ymd.learn.model.User">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into t_user(name) values (#{name})
+	</insert>
+
+
+</mapper>
